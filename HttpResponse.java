@@ -22,7 +22,7 @@ public class HttpResponse
     }
 
 
-    String toString()
+    public String toString()
     { /** Prints response formatted like we saw in class */
         return "";
     }

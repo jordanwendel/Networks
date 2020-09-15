@@ -17,7 +17,7 @@ public class HTTPMain
         // ============ GET AND SET REQUEST ============ //
         BufferedReader cin = new BufferedReader(new InputStreamReader(System.in));\
         String [] input = new String[0];
-        System.out.print("Enter 'GET <path>' Request: ");
+        System.out.print("Enter 'GET or POST <path>' Request: ");
 
         // Reads input. Splits method and path in an array of Strings
         try 

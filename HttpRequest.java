@@ -5,25 +5,23 @@ public class HttpRequest {
     String method;
     String path;
     String version = "1.1";
-    String data;
     HashMap<String, String> RequestHeader = new HashMap<String, String>();
-    Message message;
+    Message message = new Message();
+    String data = message.getMessage();
 
     void setMethod(String m)
     {/** Set method to "GET" or "POST" */
         method = m;
-        System.out.println("Method : " + method);
     }
 
     void setPath(String p)
     {/**  Set the path to the target resource */
         path = p;
-        System.out.println("Path :" + path);
     }
 
-    void setData(String d)
+    void setData()
     { /** Add the data for POST requests */
-        data = d;
+        RequestHeader.put("data", data);
     }
 
     void addHeader(String header, String value)
@@ -33,9 +31,15 @@ public class HttpRequest {
 
     public String toString()
     { /** Prints the request formatted like the requests we saw in class */
-        return method + " /" + path + " HTTP/" + version;
+        String line = method + " " + path + " HTTP/" + version + "\n";
+        for(Map.Entry<String, String> entry : RequestHeader.entrySet())
+        {
+            line += entry.getKey() + ": " + entry.getValue() + "\n";
+        }
+        line += "\n";
+
+        return line;
     }
 
-    
 
 }

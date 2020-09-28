@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.*;
 
 public class HttpRequest {
@@ -5,23 +6,30 @@ public class HttpRequest {
     String method;
     String path;
     String version = "1.1";
+    String data;
     HashMap<String, String> RequestHeader = new HashMap<String, String>();
-    Message message = new Message();
-    String data = message.getMessage();
 
-    void setMethod(String m)
+    public HttpRequest() {} // General constructor
+
+    // Constructor for adding data
+    public HttpRequest(String d)
+    {
+        data = "";
+    }
+
+    void setMethod(String m) 
     {/** Set method to "GET" or "POST" */
         method = m;
     }
 
-    void setPath(String p)
-    {/**  Set the path to the target resource */
+    void setPath(String p) 
+    {/** Set the path to the target resource */
         path = p;
     }
 
-    void setData()
+    public void setData(String d) throws IOException
     { /** Add the data for POST requests */
-        RequestHeader.put("data", data);
+        data = d;
     }
 
     void addHeader(String header, String value)
@@ -36,7 +44,13 @@ public class HttpRequest {
         {
             line += entry.getKey() + ": " + entry.getValue() + "\n";
         }
-        line += "\n";
+
+        /**  
+         * Append data. 
+         * If GET, it will be initialized but empty.
+         * POST will show an actual message from Message class.
+        */
+        line += "\n" + data; 
 
         return line;
     }

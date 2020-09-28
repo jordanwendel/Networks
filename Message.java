@@ -35,13 +35,12 @@ public class Message
         System.out.println("This message was of type " + contentType + "\n");
     }
 
-    // TEMPORARILY HERE IN CASE THEY ARE NEEDED EVENTUALLY
     // Access to instance variables
     public String getMessage() { return message; }
     public Date getDate() { return dateTime; }
     public String getType() { return contentType; }
 
-    // TEMPORARILY HERE IN CASE THEY ARE NEEDED EVENTUALLY
+    
     // Methods to change the instance data individually
     public void setMessage(String m) { message = m;}
     public void setDate(Date d) { dateTime = d; }

@@ -8,7 +8,8 @@ import java.io.*;
 import java.net.*;
 
 
-public class Message {
+public class Message 
+{
 
     private Date dateTime;
     private String message;
@@ -46,39 +47,11 @@ public class Message {
     public void setDate(Date d) { dateTime = d; }
     public void setType(String t) { contentType = t;}
 
-    public static String ReadFromFile(String fileName) throws IOException
-    { /* Function to read the message from a text file */
-        
-        // Function variables
-        String line = "";
-        String text = "";
-    
-        System.out.println("Reading information from text file...");
 
-        //Attempt to read the message from the file the user provided
-        try 
-        { // Read the file using the Scanner class
-            File file = new File(fileName);
-            BufferedReader fileReader = new BufferedReader(new FileReader(file));
-            while((line = fileReader.readLine()) != null) // Reads each individual line until null
-            { 
-                // Combines each line for the entire message
-                text += line + " ";
-            }
-            fileReader.close();
-        }
-        
-        catch (FileNotFoundException e) 
-        { // Error catching
-            System.out.println("An error occured.");
-            e.printStackTrace();
-        }
-        System.out.println("Successfully read message! ");
-
-        return text; 
-    }
+    // ReadFromFile replaced with FileManager version instead of a native function to reduce overall code
 
 
+    // Specific WriteToFile function different from that in FileManager class. Choosing not to replace this
     public static void WriteToFile(Date date, String message, String type, String fileName) throws IOException
     { /* Function to save the message to a text file */
 
@@ -141,7 +114,7 @@ public class Message {
         fileName = "message.txt";
 
         // Inputs message content to file
-        String m = ReadFromFile(fileName);
+        String m = FileManager.ReadFromFile(fileName);
 
         // Date of the message at the time of sending
         Date date = new Date();

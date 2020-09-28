@@ -1,18 +1,18 @@
 import java.util.*;
-import java.io.*;
-import java.net.*;
 
 public class HttpResponse 
 {
+
     String version;
     int code;
     String message;
     String data;
 
+    FileManager fileManager = new FileManager();
     HashMap<String, String> ResponseHeader = new HashMap<String, String>();
 
-    public HttpResponse(String res)
-    {// Constructor
+    public HttpResponse(String res) // FOR WEB SERVER PROJECT
+    {   // Constructor
         //Parse into response
         //Split new lines
     }
@@ -22,9 +22,9 @@ public class HttpResponse
         return ResponseHeader.get(header);
     }
 
-    String getData() 
+    String getData()
     { /** Return just the data from the response */
-        return ResponseHeader.get(data);
+        return data;
     }
 
     public String toString() { /** Prints response formatted like we saw in class */

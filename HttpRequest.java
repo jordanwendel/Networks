@@ -1,20 +1,23 @@
 import java.io.IOException;
 import java.util.*;
 
-public class HttpRequest {
+public class HTTPRequest {
 
     String method;
     String path;
-    String version = "1.1";
-    String data;
+    String version = "HTTP/1.1";
     HashMap<String, String> RequestHeader = new HashMap<String, String>();
+    byte[] data;
 
-    public HttpRequest() {} // General constructor
-
-    // Constructor for adding data
-    public HttpRequest(String d)
+    public HTTPRequest(String msg)
     {
-        data = "";
+        //Constructor which takes an entire request message and parses it
+        StringTokenizer parse = new StringTokenizer(msg, " ");
+        String m = parse.nextToken();
+        method = m;
+        String fileRequested = parse.nextToken();
+        path = fileRequested;
+        data = null;
     }
 
     void setMethod(String m) 
@@ -22,12 +25,23 @@ public class HttpRequest {
         method = m;
     }
 
+    String getMethod()
+    {
+        return method;
+    }
+
     void setPath(String p) 
     {/** Set the path to the target resource */
         path = p;
     }
 
-    public void setData(String d) throws IOException
+    String getPath()
+    { /** Get the path */
+        return this.path;
+    }
+
+
+    public void setData(byte[] d) throws IOException
     { /** Add the data for POST requests */
         data = d;
     }
@@ -37,23 +51,22 @@ public class HttpRequest {
         RequestHeader.put(header, value);
     }
 
+    String getHeader(String header)
+    {
+        return "";
+    }
+
     public String toString()
     { /** Prints the request formatted like the requests we saw in class */
-        String line = method + " " + path + " HTTP/" + version + "\n";
+        String line = method + " " + path + version + "\n";
         for(Map.Entry<String, String> entry : RequestHeader.entrySet())
         {
             line += entry.getKey() + ": " + entry.getValue() + "\n";
         }
 
-        /**  
-         * Append data. 
-         * If GET, it will be initialized but empty.
-         * POST will show an actual message from Message class.
-        */
         line += "\n" + data; 
 
         return line;
     }
-
 
 }
